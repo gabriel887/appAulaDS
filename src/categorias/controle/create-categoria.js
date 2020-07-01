@@ -11,7 +11,6 @@ $(document).ready(function() {
             data: dados,
             url: 'src/categorias/modelo/create-categoria.php',
             success: function(dados) {
-                alert(dados.mensagem + dados.tipo)
                 Swal.fire({
                     title: 'appAulaDS',
                     text: dados.mensagem,
