@@ -8,21 +8,19 @@
 
         $colunas = $requestData['columns'];
 
-        $sql = "SELECT IDCATEGORIA, NOME, ATIVO, DATAMODIFICACAO FROM CATEGORIAS WHERE 1=1 ";
+        $sql = "SELECT idcategoria, nome, ativo, datamodificacao FROM categorias WHERE 1=1 ";
         $resultado = mysqli_query($conexao, $sql);
         $qtdeLinhas = mysqli_num_rows($resultado);
 
         if(!empty($requestData['search']['value'])){
-
-            $sql .= " AND (IDCATEGORIA LIKE '$requestData[search][value]%' ";
-            $sql .= " OR NOME LIKE '$requestData[search][value])%')";
+            $sql .= " AND (idcategoria LIKE '$requestData[search][value]' OR nome LIKE '$requestData[search][value]')";
         }
 
         $resultado = mysqli_query($conexao, $sql);
         $totalFiltrados = mysqli_num_rows($resultado);
 
         $colunaOrdem = $requestData['order'][0]['column'];
-        $ordem = $colunas[$colunaOrdem];
+        $ordem = $colunas[$colunaOrdem]['data'];
         $direcao = $requestData['order'][0]['dir'];
 
         $sql .= " ORDER BY $ordem $direcao LIMIT $requestData[start], $requestData[length] ";
