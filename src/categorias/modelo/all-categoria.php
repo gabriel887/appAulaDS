@@ -24,14 +24,6 @@
                 "dados" => array()
             );
         }
-
-<<<<<<< HEAD
-        $json_data = array(
-            "data" => $dados;
-        );
-
-=======
->>>>>>> parent of 442c228... Revert "Update all-categoria.php"
         mysqli_close($conexao);
 
     } else {
