@@ -5,33 +5,41 @@
     if($conexao){
 
         $sql = "SELECT idcategoria, nome FROM categorias WHERE 1=1 AND ativo like 'S' ";
-        $resultado = mysqli_query($conexao, $sql);
-        $qtdeLinhas = mysqli_num_rows($resultado);
-
-        $resultado = mysqli_query($conexao, $sql);
-        $totalFiltrados = mysqli_num_rows($resultado);
-
-
+        
         $resultado = mysqli_query($conexao, $sql);
 
-        $dados = array();
-        while($linha = mysqli_fetch_assoc($resultado)){
-            $dados[] = array_map('utf8_encode', $linha);
+        if($resultado && mysqli_num_rows($resultado) > 0){
+            while($linha = mysqli_fetch_assoc($resultado)){
+                $categorias[] = array_map('utf8_encode', $linha);
+            }
+            $dados = array(
+                "tipo" => TYPE_MSG_SUCCESS,
+                "mensagem" => '',
+                "dados" => $categorias
+            );
+        }else{
+            $dados = array(
+                "tipo" => TYPE_MSG_ERROR,
+                "mensagem" => "Não foi possível localizar nenhuma categoria",
+                "dados" => array()
+            );
         }
 
+<<<<<<< HEAD
         $json_data = array(
             "data" => $dados;
         );
 
+=======
+>>>>>>> parent of 442c228... Revert "Update all-categoria.php"
         mysqli_close($conexao);
 
-    } else{
-        $json_data = array(
-            "draw" => 0,
-            "recordsTotal" => 0,
-            "recordsFiltered" => 0,
-            "data" => array()
+    } else {
+        $dados = array(
+            "tipo" => TYPE_MSG_INFO,
+            "mensagem" => "Não foi possível conectar ao banco de dados",
+            "dados" => array()
         );
     }
 
-    echo json_encode($json_data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    echo json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
