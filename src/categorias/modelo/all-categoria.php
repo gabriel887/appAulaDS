@@ -20,7 +20,7 @@
         }
 
         $json_data = array(
-            "data" => $dados
+            "data" => $dados;
         );
 
         mysqli_close($conexao);
