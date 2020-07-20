@@ -9,7 +9,7 @@ if($conexao){
 
     $sql = "DELETE FROM categorias WHERE idcategoria = $id";
 
-    $resultado = mysqli_quer($conexao, $sql);
+    $resultado = mysqli_query($conexao, $sql);
 
     if($resultado){
         $dados = array(
@@ -22,9 +22,13 @@ if($conexao){
             "mensagem" => "Não foi possível deletar."
         );
     }
+   
 }else{
     $dados = array(
         "tipo" => TYPE_MSG_ERROR,
         "mensagem" => "Erro na conexão ao banco."
     );
+    
 }
+
+echo json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

@@ -26,19 +26,19 @@ if(!$conexao){
         $datagora = date('Y-d-m H:i:s', strtotime($requestData['dataagora']));
 
 
-        $sqlComando = "UPDATE categorias SET nome = '$nome', datamodificacao = $datagora, ativo = '$ativo' where idcategoria = $idcategoria ";
+        $sqlComando = "UPDATE categorias SET nome = '$nome', ativo = '$ativo' where idcategoria = $idcategoria ";
 
          $resultado = mysqli_query($conexao, $sqlComando);
 
-         if($resultado && mysqli_num_rows($resultado) <0){
+         if($resultado){
             $dados = array(
                 'tipo' => TYPE_MSG_SUCCESS,
-                'mensagem' => 'Categoria criada com sucesso.'
+                'mensagem' => 'Categoria atualizada com sucesso.'
             );
          } else{
             $dados = array(
                 'tipo' => TYPE_MSG_ERROR,
-                'mensagem' => 'Não foi possível criar a categoria.'. mysqli_error($conexao)
+                'mensagem' => 'Não foi possível atualizar a categoria.'. mysqli_error($conexao)
             );
          }
     }
