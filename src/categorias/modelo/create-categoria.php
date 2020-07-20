@@ -22,7 +22,8 @@ if(!$conexao){
 
         $nome = $requestData['nome'];
         $ativo = $requestData['ativo'] == "on" ? "S" : "N";
-        $datagora = date('Y-d-m H:i:s', strtotime($requestData['dataagora']));
+        $date = new DateTime();
+        $datagora = $date->format('Y-m-d H:i:s');
 
 
         $sqlComando = "INSERT INTO categorias (nome, ativo, datacriacao, datamodificacao)

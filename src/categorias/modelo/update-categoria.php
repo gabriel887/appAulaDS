@@ -23,10 +23,11 @@ if(!$conexao){
         $idcategoria = $requestData['idcategoria'];
         $nome = $requestData['nome'];
         $ativo = $requestData['ativo'] == "on" ? "S" : "N";
-        $datagora = date('Y-d-m H:i:s', strtotime($requestData['dataagora']));
 
+        $date = new DateTime();
+        $datagora = $date->format('Y-m-d H:i:s');
 
-        $sqlComando = "UPDATE categorias SET nome = '$nome', ativo = '$ativo' where idcategoria = $idcategoria ";
+        $sqlComando = "UPDATE categorias SET nome = '$nome',  ativo = '$ativo', datamodificacao= '$datagora' where idcategoria = $idcategoria ";
 
          $resultado = mysqli_query($conexao, $sqlComando);
 
