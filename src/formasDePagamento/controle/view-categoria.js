@@ -1,12 +1,12 @@
 $(document).ready(function() {
 
-    $('#table-categoria').on('click', 'button.btn-edit', function(e) {
+    $('#table-categoria').on('click', 'button.btn-view', function(e) {
         e.preventDefault()
 
         $('.modal-title').empty()
         $('.modal-body').empty()
 
-        $('.modal-title').append('Edição de categoria')
+        $('.modal-title').append('Visualização de categoria')
 
         let idcategoria = `idcategoria=${$(this).attr('id')}`
 
@@ -20,18 +20,18 @@ $(document).ready(function() {
                 if (dado.tipo == "success") {
                     $('.modal-body').load('src/categorias/visao/form-categoria.html', function() {
                         $('#nome').val(dado.dados.nome)
-                        $('#datacriacao').val(dado.dados.datacriacao)
-                        $('#datamodificacao').val(dado.dados.datamodificacao)
-                        $('#escondeData').css({ 'display': 'inline' })
+                        $('#nome').attr('readonly', 'true')
+                        $('#dataagora').val(dado.dados.datacriacao)
+
                         if (dado.dados.ativo == "N") {
                             $('#ativo').removeAttr('checked')
                         }
 
-                        $('#idcategoria').val(dado.dados.idcategoria)
+                        $('#ativo').attr('readolnly', 'true')
 
                     })
                     $('.btn-save').hide()
-                    $('.btn-update').show()
+                    $('.btn-update').hide()
                     $('#modal-categoria').modal('show')
                 } else {
                     Swal.fire({

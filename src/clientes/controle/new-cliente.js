@@ -5,17 +5,17 @@ $(document).ready(function() {
         $('.modal-title').empty()
         $('.modal-body').empty()
 
-        $('.modal-title').append('Adicionar nova categoria')
+        $('.modal-title').append('Adicionar nova cliente')
 
         const datacriacao = new Date().toLocaleString()
 
-        $('.modal-body').load('src/categorias/visao/form-categoria.html', function() {
+        $('.modal-body').load('src/clientes/visao/form-cliente.html', function() {
             $('#datacriacao').val(datacriacao)
         })
 
         $('.btn-save').show()
         $('.btn-update').hide()
 
-        $('#modal-categoria').modal('show')
+        $('#modal-cliente').modal('show')
     })
 })

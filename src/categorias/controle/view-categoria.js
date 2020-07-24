@@ -21,13 +21,14 @@ $(document).ready(function() {
                     $('.modal-body').load('src/categorias/visao/form-categoria.html', function() {
                         $('#nome').val(dado.dados.nome)
                         $('#nome').attr('readonly', 'true')
-                        $('#dataagora').val(dado.dados.datacriacao)
-
+                        $('#datacriacao').val(dado.dados.datacriacao)
+                        $('#datamodificacao').val(dado.dados.datamodificacao)
+                        $('#escondeData').css({ 'display': 'inline' })
                         if (dado.dados.ativo == "N") {
                             $('#ativo').removeAttr('checked')
                         }
 
-                        $('#ativo').attr('readolnly', 'true')
+                        $('#ativo').attr('disabled', 'true')
 
                     })
                     $('.btn-save').hide()

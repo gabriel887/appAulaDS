@@ -20,9 +20,10 @@ $(document).ready(function() {
                 if (dado.tipo == "success") {
                     $('.modal-body').load('src/categorias/visao/form-categoria.html', function() {
                         $('#nome').val(dado.dados.nome)
-                        $('#datacriacao').val(dado.dados.datacriacao)
                         $('#datamodificacao').val(dado.dados.datamodificacao)
-                        $('#escondeData').css({ 'display': 'inline' })
+                        $('#datamodificacao').val('OCARALHO')
+                        $('#datacriacao').val(dado.dados.datacriacao)
+                        $('#datamodificacao').css({ 'display': 'inline' })
                         if (dado.dados.ativo == "N") {
                             $('#ativo').removeAttr('checked')
                         }

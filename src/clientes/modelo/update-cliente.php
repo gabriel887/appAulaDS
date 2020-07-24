@@ -2,7 +2,6 @@
 
 include('../../banco/conexao.php');
 require_once('../../class/Crud.class.php');
-
 if(!$conexao){
     $dados = array(
         'tipo' => TYPE_MSG_INFO,
@@ -11,32 +10,40 @@ if(!$conexao){
 } else{
 
     $requestData = $_REQUEST;
-
-    if(empty($requestData['nome']) || empty($requestData['ativo']) ){
+    $crud = Crud::getInstance($conexao, "clientes");
+    if(empty($requestData['nome']) || empty($requestData['ativo']) || empty($requestData['email']) || empty($requestData['telefone']) ){
         $dados = array(
             'tipo' => TYPE_MSG_INFO,
             'mensagem' => 'Existe(m) campo(s) obrigatório(s) vazio(s).'
         );
     } else {
+
+        $idcliente = $requestData['idcliente'];
         $nome = $requestData['nome'];
-        $ativo =$requestData['ativo'] = $requestData['ativo'] == "on" ? "S" : "N";
+        $email = $requestData['email'];
+        $telefone = $requestData['telefone'];
+        $ativo = $requestData['ativo'] == "on" ? "S" : "N";
         $date = new DateTime();
         $datagora = $requestData['dataagora'] = $date->format('Y-m-d H:i:s');
-        $cod = ['nome'=>$nome, 'ativo'=>$ativo, 'datacriacao'=>$datagora, 'datamodificacao'=>$datagora];
-        $crud = Crud::getInstance($conexao, "categorias");
-        $resultado = $crud->insert($cod);
-         if($resultado){
+        $cod = ['nome'=>$nome, 'email'=>$email, 'telefone'=>$telefone, 'ativo'=>$ativo, 'datamodificacao'=>$datagora];
+        $cond = ['idcliente='=> $idcliente];
+
+
+        $resultado = $crud->update($cod, $cond);
+
+        if($resultado){
             $dados = array(
                 'tipo' => TYPE_MSG_SUCCESS,
-                'mensagem' => 'Categoria criada com sucesso.'
+                'mensagem' => 'cliente atualizada com sucesso.'
             );
-         } else{
+        } else{
             $dados = array(
                 'tipo' => TYPE_MSG_ERROR,
-                'mensagem' => $resultado
+                'mensagem' => 'Não foi possível criar a cliente.'
             );
          }
     }
+
 }
 
 echo json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

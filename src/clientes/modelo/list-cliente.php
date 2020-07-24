@@ -5,15 +5,15 @@
     if($conexao){
 
         $requestData = $_REQUEST;
-        $crud = Crud::getInstance($conexao, 'categorias');
+        $crud = Crud::getInstance($conexao, 'clientes');
         $colunas = $requestData['columns'];
 
-        $cod = "SELECT idcategoria, nome, ativo, datamodificacao FROM categorias WHERE 1=1 ";
+        $cod = "SELECT idcliente, nome, email, ativo, telefone, datamodificacao FROM clientes WHERE 1=1 ";
         $resultado = $crud->getSQLGeneric($cod);
         $qtdeLinhas = count($resultado);
         
         if(!empty($requestData['search']['value'])){
-            $cod .= " AND (idcategoria LIKE '$requestData[search][value]' OR nome LIKE '$requestData[search][value]')";
+            $cod .= " AND (idcliente LIKE '$requestData[search][value]' OR nome LIKE '$requestData[search][value]')";
         }
 
         $resultado = $crud->getSQLGeneric($cod);

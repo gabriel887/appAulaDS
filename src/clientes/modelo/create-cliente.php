@@ -19,16 +19,18 @@ if(!$conexao){
         );
     } else {
         $nome = $requestData['nome'];
-        $ativo =$requestData['ativo'] = $requestData['ativo'] == "on" ? "S" : "N";
+        $ativo = $requestData['ativo'] == "on" ? "S" : "N";
+        $email = $requestData['email'];
+        $telefone = $requestData['telefone'];
         $date = new DateTime();
         $datagora = $requestData['dataagora'] = $date->format('Y-m-d H:i:s');
-        $cod = ['nome'=>$nome, 'ativo'=>$ativo, 'datacriacao'=>$datagora, 'datamodificacao'=>$datagora];
-        $crud = Crud::getInstance($conexao, "categorias");
+        $cod = ['nome'=>$nome, 'email'=>$email, 'telefone'=>$telefone, 'ativo'=>$ativo, 'datacriacao'=>$datagora, 'datamodificacao'=>$datagora];
+        $crud = Crud::getInstance($conexao, "clientes");
         $resultado = $crud->insert($cod);
          if($resultado){
             $dados = array(
                 'tipo' => TYPE_MSG_SUCCESS,
-                'mensagem' => 'Categoria criada com sucesso.'
+                'mensagem' => 'cliente criada com sucesso.'
             );
          } else{
             $dados = array(

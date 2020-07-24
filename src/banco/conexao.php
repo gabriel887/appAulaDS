@@ -2,5 +2,9 @@
 
 include('config.php');
 
-$conexao = @mysqli_connect(DBHOST, DBUSER, DBPASSWORD, DBNAME);
+$DBHOST= 'localhost';
+$DBUSER = 'root';
+$DBPASSWORD = '';
+$DBNAME = 'dbaulads';
 
+$conexao = new PDO("mysql:host=" . $DBHOST . "; dbname=" . $DBNAME, $DBUSER, $DBPASSWORD);

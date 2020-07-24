@@ -5,10 +5,10 @@
     if($conexao){
 
         $requestData = $_REQUEST;
-        $crud = Crud::getInstance($conexao, "categorias");
-        $id = isset($requestData['idcategoria']) ? $requestData['idcategoria'] : '';
+        $crud = Crud::getInstance($conexao, "clientes");
+        $id = isset($requestData['idcliente']) ? $requestData['idcliente'] : '';
 
-        $cod = "SELECT idcategoria, nome, ativo, DATE_FORMAT(datacriacao, '%d/%m/%Y %H:%i:%s') as datacriacao, DATE_FORMAT(datamodificacao, '%d/%m/%Y %H:%i:%s') as datamodificacao FROM CATEGORIAS WHERE IDCATEGORIA = $id";
+        $cod = "SELECT idcliente, nome, email, ativo, telefone, DATE_FORMAT(datacriacao, '%d/%m/%Y %H:%i:%s') as datacriacao, DATE_FORMAT(datamodificacao, '%d/%m/%Y %H:%i:%s') as datamodificacao FROM clienteS WHERE IDcliente = $id";
 
         $resultado = $crud->getSQLGeneric($cod, null,false);
         if($resultado){
@@ -22,7 +22,7 @@
         } else{
             $dados = array(
                 "tipo" => TYPE_MSG_ERROR,
-                "mensagem" => "Não foi possível localizar a categoria",
+                "mensagem" => "Não foi possível localizar a cliente",
                 "dados" => array()
             );
         }
